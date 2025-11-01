@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Identifier</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        #preview {
+            max-width: 100%;
+            max-height: 400px;
+            margin: 1rem 0;
+            display: none;
+        }
+        .webcam-container {
+            width: 100%;
+            max-width: 640px;
+            position: relative;
+            margin: 0 auto;
+        }
+        #webcam {
+            width: 100%;
+            border-radius: 8px;
+            display: none;
+        }
+        .result {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            min-height: 2rem;
+        }
+        .confidence {
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-600 mb-2">Fruit Identifier</h1>
+            <p class="text-gray-600">Upload an image or use your webcam to identify fruits</p>
+        </header>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 max-w-3xl mx-auto">
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="w-full md:w-1/2">
+                    <div class="webcam-container">
+                        <video id="webcam" autoplay playsinline></video>
+                        <img id="preview" alt="Preview">
+                    </div>
+                    <div class="flex flex-col gap-2 mt-4">
+                        <button id="startWebcam" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
+                            Start Webcam
+                        </button>
+                        <button id="capture" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded hidden">
+                            Capture Image
+                        </button>
+                        <input type="file" id="fileInput" accept="image/*" class="hidden" />
+                        <button id="uploadBtn" class="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded">
+                            Upload Image
+                        </button>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-xl font-semibold mb-4">Results</h2>
+                    <div class="result" id="result">
+                        <p>Take a picture or upload an image to identify the fruit.</p>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="font-semibold mb-2">Model Info</h3>
+                        <p>Status: <span id="modelStatus">Loading model...</span></p>
+                        <p class="text-sm text-gray-600 mt-2">This app uses TensorFlow.js with a pre-trained MobileNet model to identify fruits in images.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center text-gray-600 text-sm mt-8 pb-4">
+        <p>Computer Vision Assignment - Fruit Identifier</p>
+    </footer>
+
+    <!-- Load TensorFlow.js and MobileNet model -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.18.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0"></script>
+    
+    <!-- Our main JavaScript file -->
+    <script src="app.js"></script>
+</body>
+</html>
